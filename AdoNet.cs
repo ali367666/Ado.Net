@@ -138,4 +138,26 @@ public class AdoNet
             Console.WriteLine("Droped failed"+ex.Message);
         }
     }
+
+    public void UpdateTableByName(string tableName,string newname,string name)
+    {
+        string connectionString =
+       @"Data Source=DESKTOP-ET5TVFM\SQLEXPRESS;
+       Initial Catalog=PizzaMizza2;
+       Integrated Security=True;
+       TrustServerCertificate=True;";
+        try
+        {
+            using SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            string query = $"update {tableName} set Name='{newname}' where Name='{name}'  ";
+            using SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.ExecuteNonQuery();
+            Console.WriteLine($"Updated {name} succesfully");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Updated failed" + ex.Message);
+        }
+    }
 }

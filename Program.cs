@@ -9,4 +9,6 @@ AdoNet ado=new AdoNet();
 //ado.InsertedByName("Fazil");
 //ado.AddColumn("Names", "City", "nvarchar(50)");
 
-ado.DropTable("Test1");
+//ado.DropTable("Test1");
+
+ado.UpdateTableByName("Names", "Mehdi", "Fazil");
