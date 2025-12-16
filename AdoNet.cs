@@ -155,9 +155,8 @@ public class AdoNet
             using SqlCommand cmd = new SqlCommand(query, conn);
 
             int rowsAffected = cmd.ExecuteNonQuery();
-            Console.WriteLine(rowsAffected > 0
-                ? $"Updated '{oldname}' successfully to '{newname}'"
-                : $"No rows found with Name = '{oldname}'");
+            string message = rowsAffected > 0 ? "Updated succesfully" : "Updated failed,not found";
+            Console.WriteLine(message);
         }
         catch (Exception ex)
         {
