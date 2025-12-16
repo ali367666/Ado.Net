@@ -11,4 +11,4 @@ AdoNet ado=new AdoNet();
 
 //ado.DropTable("Test1");
 
-ado.UpdateTableByName("Names", "Mehdi", "Fazil");
+ado.UpdateTableByName("Names", "Daskesen", "Mehdi");

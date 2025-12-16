@@ -139,7 +139,7 @@ public class AdoNet
         }
     }
 
-    public void UpdateTableByName(string tableName,string newname,string name)
+    public void UpdateTableByName(string tableName,string newname,string oldname)
     {
         string connectionString =
        @"Data Source=DESKTOP-ET5TVFM\SQLEXPRESS;
@@ -150,14 +150,18 @@ public class AdoNet
         {
             using SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
-            string query = $"update {tableName} set Name='{newname}' where Name='{name}'  ";
+
+            string query = $"UPDATE {tableName} SET Name = '{newname}' WHERE Name = '{oldname}'";
             using SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.ExecuteNonQuery();
-            Console.WriteLine($"Updated {name} succesfully");
+
+            int rowsAffected = cmd.ExecuteNonQuery();
+            Console.WriteLine(rowsAffected > 0
+                ? $"Updated '{oldname}' successfully to '{newname}'"
+                : $"No rows found with Name = '{oldname}'");
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Updated failed" + ex.Message);
+            Console.WriteLine("Update failed: " + ex.Message);
         }
     }
 }
