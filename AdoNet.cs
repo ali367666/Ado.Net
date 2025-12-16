@@ -4,15 +4,16 @@ namespace ConnectionSQLAdoNet;
 
 public class AdoNet
 {
+    private readonly string _connectionString =
+        @"Data Source=DESKTOP-ET5TVFM\SQLEXPRESS;
+        Initial Catalog=PizzaMizza2;
+        Integrated Security=True;
+        TrustServerCertificate=True;";
 
     public void SelectAll()
     {
-        string connectionString =
-       @"Data Source=DESKTOP-ET5TVFM\SQLEXPRESS;
-       Initial Catalog=PizzaMizza2;
-       Integrated Security=True;
-       TrustServerCertificate=True;";
-       using (SqlConnection con = new SqlConnection(connectionString))
+       
+       using (SqlConnection con = new SqlConnection(_connectionString))
         {
             con.Open();
             string query = "Select * from Names";
@@ -30,13 +31,8 @@ public class AdoNet
     }
     public void DeleteByID(int id)
     {
-        string connectionString =
-       @"Data Source=DESKTOP-ET5TVFM\SQLEXPRESS;
-       Initial Catalog=PizzaMizza2;
-       Integrated Security=True;
-       TrustServerCertificate=True;";
 
-        using SqlConnection con = new SqlConnection(connectionString);
+        using SqlConnection con = new SqlConnection(_connectionString);
         con.Open();
         string query = $"Delete from Names where ID={id}";
         using SqlCommand cmd=new SqlCommand(query,con);
@@ -46,13 +42,8 @@ public class AdoNet
     }
     public void DeleteByName(string name)
     {
-        string connectionString =
-       @"Data Source=DESKTOP-ET5TVFM\SQLEXPRESS;
-       Initial Catalog=PizzaMizza2;
-       Integrated Security=True;
-       TrustServerCertificate=True;";
-
-        using SqlConnection con=new SqlConnection(connectionString);
+       
+        using SqlConnection con=new SqlConnection(_connectionString);
         con.Open();
         string query = $"Delete from Names where Name='{name}'";
         using SqlCommand cmd=new SqlCommand( query,con);
@@ -63,13 +54,9 @@ public class AdoNet
 
     public void InsertValue(string name,string surname)
     {
-        string connectionString =
-       @"Data Source=DESKTOP-ET5TVFM\SQLEXPRESS;
-       Initial Catalog=PizzaMizza2;
-       Integrated Security=True;
-       TrustServerCertificate=True;";
+    
 
-        using SqlConnection con=new SqlConnection( connectionString);
+        using SqlConnection con=new SqlConnection(_connectionString);
         con.Open();
         string query = $"Insert into Names values('{name}','{surname}')";
         using SqlCommand cmd = new SqlCommand(query, con);
@@ -79,13 +66,9 @@ public class AdoNet
     }
     public void InsertedByName(string name)
     {
-        string connectionString =
-       @"Data Source=DESKTOP-ET5TVFM\SQLEXPRESS;
-       Initial Catalog=PizzaMizza2;
-       Integrated Security=True;
-       TrustServerCertificate=True;";
 
-        using SqlConnection connection=new SqlConnection(connectionString);
+
+        using SqlConnection connection=new SqlConnection(_connectionString);
         connection.Open();
         string query = $"Insert into Names(Name) values('{name}')";
         using SqlCommand cmd=new SqlCommand(query,connection);
@@ -96,14 +79,10 @@ public class AdoNet
 
     public void AddColumn(string tableName, string columnName, string dataType)
     {
-        string connectionString =
-       @"Data Source=DESKTOP-ET5TVFM\SQLEXPRESS;
-       Initial Catalog=PizzaMizza2;
-       Integrated Security=True;
-       TrustServerCertificate=True;";
+
         try
         {
-            using SqlConnection conn = new SqlConnection(connectionString);
+            using SqlConnection conn = new SqlConnection(_connectionString);
             conn.Open();
             string query = $"Alter table {tableName} add  {columnName} {dataType}";
             using SqlCommand cmd = new SqlCommand(query, conn);
@@ -119,14 +98,10 @@ public class AdoNet
     }
     public void DropTable(string tableName)
     {
-        string connectionString =
-       @"Data Source=DESKTOP-ET5TVFM\SQLEXPRESS;
-       Initial Catalog=PizzaMizza2;
-       Integrated Security=True;
-       TrustServerCertificate=True;";
+
         try
         {
-            using SqlConnection conn = new SqlConnection(connectionString);
+            using SqlConnection conn = new SqlConnection(_connectionString);
             conn.Open();
             string query = $"Drop table {tableName} ";
             using SqlCommand cmd = new SqlCommand(query, conn);
@@ -141,14 +116,10 @@ public class AdoNet
 
     public void UpdateTableByName(string tableName,string newname,string oldname)
     {
-        string connectionString =
-       @"Data Source=DESKTOP-ET5TVFM\SQLEXPRESS;
-       Initial Catalog=PizzaMizza2;
-       Integrated Security=True;
-       TrustServerCertificate=True;";
+
         try
         {
-            using SqlConnection conn = new SqlConnection(connectionString);
+            using SqlConnection conn = new SqlConnection(_connectionString);
             conn.Open();
 
             string query = $"UPDATE {tableName} SET Name = '{newname}' WHERE Name = '{oldname}'";
