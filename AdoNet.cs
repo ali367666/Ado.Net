@@ -5,25 +5,25 @@ namespace ConnectionSQLAdoNet;
 public class AdoNet
 {
     private readonly string _connectionString =
-        @"Data Source=DESKTOP-ET5TVFM\SQLEXPRESS;
-        Initial Catalog=PizzaMizza2;
+        @"Data Source=WIN-1RGC9R2B9PJ;
+        Initial Catalog=AliAxmedov;
         Integrated Security=True;
         TrustServerCertificate=True;";
 
-    public void SelectAll()
+    public void SelectAll(string tableName)
     {
        
        using (SqlConnection con = new SqlConnection(_connectionString))
         {
             con.Open();
-            string query = "Select * from Names";
+            string query = $"Select * from {tableName}";
             using(SqlCommand cmd = new SqlCommand(query,con))
             {
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        Console.WriteLine($"{reader["ID"]}-{reader["Name"]} {reader["Surname"]}");
+                        Console.WriteLine($"{reader["ID"]}-{reader["FirstName"]} {reader["SurName"]}");
                     }
                 }
             }
@@ -132,6 +132,25 @@ public class AdoNet
         catch (Exception ex)
         {
             Console.WriteLine("Update failed: " + ex.Message);
+        }
+    }
+
+    public void TruncateTable(string tableName)
+    {
+        try
+        {
+            using SqlConnection conn=new SqlConnection(_connectionString);
+            conn.Open();
+
+            string query=$"TRUNCATE TABLE {tableName}";
+            using SqlCommand cmd = new SqlCommand(query, conn);
+            var affectedRows = cmd.ExecuteNonQuery();
+            string message=affectedRows>-2? "Truncated succesfully" : "Truncated failed";
+            Console.WriteLine(message);
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine("Truncated failed: "+ex.Message);
         }
     }
 }
