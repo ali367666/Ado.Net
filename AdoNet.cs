@@ -10,25 +10,25 @@ public class AdoNet
         Integrated Security=True;
         TrustServerCertificate=True;";
 
-    public void SelectAll()
+    public void SelectAll(string tableName)
     {
-       
-       using (SqlConnection con = new SqlConnection(_connectionString))
+        using SqlConnection con = new SqlConnection(_connectionString);
+        con.Open();
+
+        string query = $"SELECT * FROM {tableName}";
+        using SqlCommand cmd = new SqlCommand(query, con);
+        using SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
         {
-            con.Open();
-            string query = "Select * from Names";
-            using(SqlCommand cmd = new SqlCommand(query,con))
+            for (int i = 0; i < reader.FieldCount; i++)
             {
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        Console.WriteLine($"{reader["ID"]}-{reader["Name"]} {reader["Surname"]}");
-                    }
-                }
+                Console.Write($"{reader.GetName(i)}: {reader[i]} | ");
             }
+            Console.WriteLine();
         }
     }
+
     public void DeleteByID(int id)
     {
 
@@ -51,7 +51,6 @@ public class AdoNet
         string message = affectedRows > 0 ? "Delete successfull" : "Delete failed";
         Console.WriteLine(message);
     }
-
     public void InsertValue(string name,string surname)
     {
     
@@ -108,12 +107,11 @@ public class AdoNet
             cmd.ExecuteNonQuery();
             Console.WriteLine("Droped table succesfully");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
-            Console.WriteLine("Droped failed"+ex.Message);
+            Console.WriteLine("Droped failed" + ex.Message);
         }
     }
-
     public void UpdateTableByName(string tableName,string newname,string oldname)
     {
 
