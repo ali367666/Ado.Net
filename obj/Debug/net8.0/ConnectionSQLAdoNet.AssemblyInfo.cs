@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ConnectionSQLAdoNet")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f0450f1f0cf6fe5dbacf9bbee19d5b6fbab8798")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f83336949d53c1e54efa192de7f73c2d4b24a58f")]
 [assembly: System.Reflection.AssemblyProductAttribute("ConnectionSQLAdoNet")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ConnectionSQLAdoNet")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
