@@ -5,8 +5,8 @@ namespace ConnectionSQLAdoNet;
 public class AdoNet
 {
     private readonly string _connectionString =
-        @"Data Source=WIN-1RGC9R2B9PJ;
-        Initial Catalog=AliAxmedov;
+        @"Data Source=DESKTOP-ET5TVFM\SQLEXPRESS;
+        Initial Catalog=PizzaMizza2;
         Integrated Security=True;
         TrustServerCertificate=True;";
 
@@ -21,27 +21,15 @@ public class AdoNet
 
         while (reader.Read())
         {
-<<<<<<< HEAD
             for (int i = 0; i < reader.FieldCount; i++)
             {
                 Console.Write($"{reader.GetName(i)}: {reader[i]} | ");
-=======
-            con.Open();
-            string query = $"Select * from {tableName}";
-            using(SqlCommand cmd = new SqlCommand(query,con))
-            {
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        Console.WriteLine($"{reader["ID"]}-{reader["FirstName"]} {reader["SurName"]}");
-                    }
-                }
->>>>>>> ace8acc2561e454d47a28df876a5cd0d9beefad7
             }
             Console.WriteLine();
         }
     }
+
+
 
     public void DeleteByID(int id)
     {
